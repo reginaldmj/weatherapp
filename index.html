@@ -39,5 +39,21 @@
             
         </div>
     </div>
+
+
+
+    <script>
+
+    const apiKey = "14371853ff4682a641d07d6905df5c0a";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?appid=&units=metric&q=nashville";
+    
+    async function checkWeather(){
+        const response = await fetch(apiUrl + `&appid=${apiKey}`);
+        var data = await response.json();
+
+        console.log(data);
+    }
+
+    </script>
   </body>
 </html>
