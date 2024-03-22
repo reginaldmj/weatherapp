@@ -45,23 +45,30 @@
     <script>
 
     const apiKey = "14371853ff4682a641d07d6905df5c0a"; // api pull
-    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?=&units=metric&q=nashville";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?=&units=metric&q=";
+
+    const searchBox = document.querySelector(".search input");
+    const searchBtn = document.querySelector(".search button");
     
-    async function checkWeather(){ // weather check function
-        const response = await fetch(apiUrl + `&appid=${apiKey}`);
+    async function checkWeather(city){ // weather check function
+        const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
         var data = await response.json();
 
         console.log(data);
         
         document.querySelector(".city").innerHTML = data.name; // city, temp, humidity, wind select
-        document.querySelector(".temp").innerHTML = data.main.temp;
-        document.querySelector(".humidity").innerHTML = data.main.humidity;
-        document.querySelector(".wind").innerHTML = data.wind.speed;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
         
         
     }
+
+    searchBtn.addEventListener("click", ()=>{
+        checkWeather(searchBox.value); // weather call
+    })
     
-    checkWeather(); // weather call
+    
     
     </script>
   
